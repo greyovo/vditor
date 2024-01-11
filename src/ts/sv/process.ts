@@ -18,7 +18,7 @@ export const processPaste = (vditor: IVditor, text: string) => {
     if (!blockElement) {
         blockElement = vditor.sv.element;
     }
-    let spinHTML = vditor.lute.SpinVditorSVDOM(blockElement.textContent)
+    let spinHTML = vditor.luteProxy.SpinVditorSVDOM(blockElement.textContent)
     spinHTML = "<div data-block='0'>" +
         spinHTML.replace(/<span data-type="newline"><br \/><span style="display: none">\n<\/span><\/span><span data-type="newline"><br \/><span style="display: none">\n<\/span><\/span></g, '<span data-type="newline"><br /><span style="display: none">\n</span></span><span data-type="newline"><br /><span style="display: none">\n</span></span></div><div data-block="0"><') +
         "</div>";
@@ -53,7 +53,7 @@ export const getSideByType = (spanNode: Node, type: string, isPrevious = true) =
 
 export const processSpinVditorSVDOM = (html: string, vditor: IVditor) => {
     log("SpinVditorSVDOM", html, "argument", vditor.options.debugger);
-    const spinHTML = vditor.lute.SpinVditorSVDOM(html)
+    const spinHTML = vditor.luteProxy.SpinVditorSVDOM(html)
     html = "<div data-block='0'>" +
         spinHTML.replace(/<span data-type="newline"><br \/><span style="display: none">\n<\/span><\/span><span data-type="newline"><br \/><span style="display: none">\n<\/span><\/span></g, '<span data-type="newline"><br /><span style="display: none">\n</span></span><span data-type="newline"><br /><span style="display: none">\n</span></span></div><div data-block="0"><') +
         "</div>";

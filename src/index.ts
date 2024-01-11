@@ -28,10 +28,9 @@ import { Undo } from "./ts/undo/index";
 import { Upload } from "./ts/upload/index";
 import { addScript, addScriptSync } from "./ts/util/addScript";
 import { getSelectText } from "./ts/util/getSelectText";
-import { LuteProxy } from "./ts/util/luteProxy";
+import { LuteProxy } from "./ts/util/LuteProxy";
 import { Options } from "./ts/util/Options";
 import { processCodeRender } from "./ts/util/processCode";
-import { renderMd2Html } from "./ts/util/renderMd2Html";
 import { getCursorPosition, getEditorRange } from "./ts/util/selection";
 import { afterRenderEvent } from "./ts/wysiwyg/afterRenderEvent";
 import { WYSIWYG } from "./ts/wysiwyg/index";
@@ -218,7 +217,7 @@ class Vditor extends VditorMethod {
 
     /** HTML 转 md */
     public html2md(value: string) {
-        return this.vditor.lute.HTML2Md(value);
+        return this.vditor.luteProxy.HTML2Md(value);
     }
 
     /** markdown 转 JSON 输出 */
@@ -283,7 +282,7 @@ class Vditor extends VditorMethod {
     /** 设置编辑器内容 */
     public setValue(markdown: string, clearStack = false) {
         if (this.vditor.currentMode === "sv") {
-            this.vditor.sv.element.innerHTML = `<div data-block='0'>${this.vditor.lute.SpinVditorSVDOM(markdown)}</div>`;
+            this.vditor.sv.element.innerHTML = `<div data-block='0'>${this.vditor.luteProxy.SpinVditorSVDOM(markdown)}</div>`;
             processSVAfterRender(this.vditor, {
                 enableAddUndoStack: true,
                 enableHint: false,
@@ -296,8 +295,17 @@ class Vditor extends VditorMethod {
                 enableInput: false,
             });
         } else {
-            renderMd2Html(this.vditor, markdown)
-
+            this.vditor.ir.element.innerHTML = this.vditor.luteProxy.Md2VditorIRDOM(markdown);
+            this.vditor.ir.element
+                .querySelectorAll(".vditor-ir__preview[data-render='2']")
+                .forEach((item: HTMLElement) => {
+                    processCodeRender(item, this.vditor);
+                });
+            processAfterRender(this.vditor, {
+                enableAddUndoStack: true,
+                enableHint: false,
+                enableInput: false,
+            });
         }
 
         this.vditor.outline.render(this.vditor);
@@ -444,6 +452,7 @@ class Vditor extends VditorMethod {
             element: id,
             hint: new Hint(mergedOptions.hint.extend),
             lute: undefined,
+            luteProxy: undefined,
             options: mergedOptions,
             originalInnerHTML: id.innerHTML,
             outline: new Outline(window.VditorI18n.outline),
@@ -468,8 +477,8 @@ class Vditor extends VditorMethod {
             this.vditor.upload = new Upload();
         }
 
-        if (mergedOptions.customRender !== undefined) {
-            this.vditor.customRender = mergedOptions.customRender;
+        if (mergedOptions.hooks !== undefined) {
+            this.vditor.hooks = mergedOptions.hooks;
         }
 
         addScript(
@@ -500,7 +509,7 @@ class Vditor extends VditorMethod {
                 toc: this.vditor.options.preview.markdown.toc,
             });
 
-            this.vditor.luteProxy = new LuteProxy(this.vditor.lute)
+            this.vditor.luteProxy = new LuteProxy(this.vditor)
 
             this.vditor.preview = new Preview(this.vditor);
 

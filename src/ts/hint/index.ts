@@ -173,11 +173,11 @@ ${i === 0 ? "class='vditor-hint--current'" : ""}> ${html}</button>`;
 
         if (vditor.options.hint.parse) {
             if (vditor.currentMode === "sv") {
-                insertHTML(vditor.lute.SpinVditorSVDOM(value), vditor);
+                insertHTML(vditor.luteProxy.SpinVditorSVDOM(value), vditor);
             } else if (vditor.currentMode === "wysiwyg") {
-                insertHTML(vditor.lute.SpinVditorDOM(value), vditor);
+                insertHTML(vditor.luteProxy.SpinVditorDOM(value), vditor);
             } else {
-                insertHTML(vditor.lute.SpinVditorIRDOM(value), vditor);
+                insertHTML(vditor.luteProxy.SpinVditorIRDOM(value), vditor);
             }
         } else {
             insertHTML(value, vditor);

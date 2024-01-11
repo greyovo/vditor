@@ -139,7 +139,7 @@ export const input = (vditor: IVditor, range: Range, event?: InputEvent) => {
         }
 
         log("SpinVditorDOM", html, "argument", vditor.options.debugger);
-        html = vditor.lute.SpinVditorDOM(html);
+        html = vditor.luteProxy.SpinVditorDOM(html);
         log("SpinVditorDOM", html, "result", vditor.options.debugger);
 
         if (isWYSIWYGElement) {

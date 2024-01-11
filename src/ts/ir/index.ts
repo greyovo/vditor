@@ -75,7 +75,7 @@ contenteditable="true" spellcheck="false"></pre>
         const tempElement = document.createElement("div");
         tempElement.appendChild(range.cloneContents());
 
-        event.clipboardData.setData("text/plain", vditor.lute.VditorIRDOM2Md(tempElement.innerHTML).trim());
+        event.clipboardData.setData("text/plain", vditor.luteProxy.VditorIRDOM2Md(tempElement.innerHTML).trim());
         event.clipboardData.setData("text/html", "");
     }
 

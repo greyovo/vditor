@@ -57,7 +57,7 @@ export const setEditMode = (vditor: IVditor, type: string, event: Event | string
         vditor.lute.SetVditorSV(false);
 
         vditor.currentMode = "ir";
-        vditor.ir.element.innerHTML = vditor.lute.Md2VditorIRDOM(markdownText);
+        vditor.ir.element.innerHTML = vditor.luteProxy.Md2VditorIRDOM(markdownText);
         processAfterRender(vditor, {
             enableAddUndoStack: true,
             enableHint: false,

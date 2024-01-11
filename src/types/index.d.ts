@@ -768,10 +768,10 @@ interface IOptions {
     outline?: IOutline;
 
     /** 自定义渲染钩子，支持渲染前和渲染后 */
-    customRender?: {
+    hooks?: {
         before?(md: string): string;
         // render?(md: string): HTMLElement; # 暂未支持
-        after?(element: HTMLElement): HTMLElement;
+        after?(html: string): string;
     };
 
     /** 编辑器异步渲染完成后的回调方法 */
@@ -810,7 +810,7 @@ interface IVditor {
     options: IOptions;
     originalInnerHTML: string;
     lute: Lute;
-    luteProxy?: ILuteProxy;
+    luteProxy: ILuteProxy;
     currentMode: "sv" | "wysiwyg" | "ir";
     devtools?: {
         element: HTMLDivElement,
@@ -864,10 +864,10 @@ interface IVditor {
         recordFirstPosition(vditor: IVditor, event: KeyboardEvent): void,
         resetIcon(vditor: IVditor): void,
     };
-    customRender?: {
+    hooks?: {
         before?(md: string): string;
         // render?(md: string): HTMLElement;
-        after?(element: HTMLElement): HTMLElement;
+        after?(html: string): string;
     };
     wysiwyg?: {
         range: Range,

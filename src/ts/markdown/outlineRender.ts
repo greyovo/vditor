@@ -22,11 +22,11 @@ export const outlineRender = (contentElement: HTMLElement, targetElement: Elemen
     if (vditor) {
         vditor.lute.SetToC(true);
         if (vditor.currentMode === "wysiwyg" && !vditor.preview.element.contains(contentElement)) {
-            tempElement.innerHTML = vditor.lute.SpinVditorDOM("<p>[ToC]</p>" + tocHTML);
+            tempElement.innerHTML = vditor.luteProxy.SpinVditorDOM("<p>[ToC]</p>" + tocHTML);
         } else if (vditor.currentMode === "ir" && !vditor.preview.element.contains(contentElement)) {
-            tempElement.innerHTML = vditor.lute.SpinVditorIRDOM("<p>[ToC]</p>" + tocHTML);
+            tempElement.innerHTML = vditor.luteProxy.SpinVditorIRDOM("<p>[ToC]</p>" + tocHTML);
         } else {
-            tempElement.innerHTML = vditor.lute.HTML2VditorDOM("<p>[ToC]</p>" + tocHTML);
+            tempElement.innerHTML = vditor.luteProxy.HTML2VditorDOM("<p>[ToC]</p>" + tocHTML);
         }
         vditor.lute.SetToC(vditor.options.preview.markdown.toc);
     } else {

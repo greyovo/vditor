@@ -100,7 +100,7 @@ const removeInline = (range: Range, vditor: IVditor, type: string) => {
         inlineElement.lastElementChild.remove();
         range.insertNode(document.createElement("wbr"));
         const tempElement = document.createElement("div");
-        tempElement.innerHTML = vditor.lute.SpinVditorIRDOM(inlineElement.outerHTML);
+        tempElement.innerHTML = vditor.luteProxy.SpinVditorIRDOM(inlineElement.outerHTML);
         inlineElement.outerHTML = tempElement.firstElementChild.innerHTML.trim();
     }
 };

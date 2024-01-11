@@ -14,8 +14,6 @@ import { processAfterRender } from "./process";
 import { getMarkdown } from "../markdown/getMarkdown";
 
 export const input = (vditor: IVditor, range: Range, ignoreSpace = false, event?: InputEvent) => {
-    vditor.customRender?.before(getMarkdown(vditor))
-
     let blockElement = hasClosestBlock(range.startContainer);
     // 前后可以输入空格
     if (blockElement && !ignoreSpace && blockElement.getAttribute("data-type") !== "code-block") {
@@ -172,7 +170,7 @@ export const input = (vditor: IVditor, range: Range, ignoreSpace = false, event?
     }
 
     log("SpinVditorIRDOM", html, "argument", vditor.options.debugger);
-    html = vditor.lute.SpinVditorIRDOM(html);
+    html = vditor.luteProxy.SpinVditorIRDOM(html);
     log("SpinVditorIRDOM", html, "result", vditor.options.debugger);
 
     if (isIRElement) {

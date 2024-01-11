@@ -281,9 +281,9 @@ export const listIndent = (vditor: IVditor, liElement: HTMLElement, range: Range
             `<${liParentElement.tagName} data-block="0">${liHTML}</${liParentElement.tagName}>`);
 
         if (vditor.currentMode === "wysiwyg") {
-            liParentElement.outerHTML = vditor.lute.SpinVditorDOM(liParentElement.outerHTML);
+            liParentElement.outerHTML = vditor.luteProxy.SpinVditorDOM(liParentElement.outerHTML);
         } else {
-            liParentElement.outerHTML = vditor.lute.SpinVditorIRDOM(liParentElement.outerHTML);
+            liParentElement.outerHTML = vditor.luteProxy.SpinVditorIRDOM(liParentElement.outerHTML);
         }
 
         setRangeByWbr(vditor[vditor.currentMode].element, range);
@@ -350,9 +350,9 @@ export const listOutdent = (vditor: IVditor, liElement: HTMLElement, range: Rang
         }
 
         if (vditor.currentMode === "wysiwyg") {
-            topListElement.outerHTML = vditor.lute.SpinVditorDOM(topListElement.outerHTML);
+            topListElement.outerHTML = vditor.luteProxy.SpinVditorDOM(topListElement.outerHTML);
         } else {
-            topListElement.outerHTML = vditor.lute.SpinVditorIRDOM(topListElement.outerHTML);
+            topListElement.outerHTML = vditor.luteProxy.SpinVditorIRDOM(topListElement.outerHTML);
         }
 
         setRangeByWbr(vditor[vditor.currentMode].element, range);
@@ -565,7 +565,7 @@ export const fixMarkdown = (event: KeyboardEvent, vditor: IVditor, pElement: HTM
             let tableHeaderMD = pTextList.map(() => "---").join("|");
             tableHeaderMD =
                 pElement.textContent + "\n" + tableHeaderMD.substring(3, tableHeaderMD.length - 3) + "\n|<wbr>";
-            pElement.outerHTML = vditor.lute.SpinVditorDOM(tableHeaderMD);
+            pElement.outerHTML = vditor.luteProxy.SpinVditorDOM(tableHeaderMD);
             setRangeByWbr(vditor[vditor.currentMode].element, range);
             execAfterRender(vditor);
             scrollCenter(vditor);
@@ -596,9 +596,9 @@ export const fixMarkdown = (event: KeyboardEvent, vditor: IVditor, pElement: HTM
         if (isHeadingMD(pElement.innerHTML)) {
             // heading 渲染
             if (vditor.currentMode === "wysiwyg") {
-                pElement.outerHTML = vditor.lute.SpinVditorDOM(pElement.innerHTML + '<p data-block="0"><wbr>\n</p>');
+                pElement.outerHTML = vditor.luteProxy.SpinVditorDOM(pElement.innerHTML + '<p data-block="0"><wbr>\n</p>');
             } else {
-                pElement.outerHTML = vditor.lute.SpinVditorIRDOM(pElement.innerHTML + '<p data-block="0"><wbr>\n</p>');
+                pElement.outerHTML = vditor.luteProxy.SpinVditorIRDOM(pElement.innerHTML + '<p data-block="0"><wbr>\n</p>');
             }
             setRangeByWbr(vditor[vditor.currentMode].element, range);
             execAfterRender(vditor);
@@ -1409,15 +1409,15 @@ export const paste = async (vditor: IVditor, event: (ClipboardEvent | DragEvent)
             if (vditor.currentMode === "ir") {
                 renderers.HTML2VditorIRDOM = {renderLinkDest};
                 vditor.lute.SetJSRenderers({renderers});
-                insertHTML(vditor.lute.HTML2VditorIRDOM(tempElement.innerHTML), vditor);
+                insertHTML(vditor.luteProxy.HTML2VditorIRDOM(tempElement.innerHTML), vditor);
             } else if (vditor.currentMode === "wysiwyg") {
                 renderers.HTML2VditorDOM = {renderLinkDest};
                 vditor.lute.SetJSRenderers({renderers});
-                insertHTML(vditor.lute.HTML2VditorDOM(tempElement.innerHTML), vditor);
+                insertHTML(vditor.luteProxy.HTML2VditorDOM(tempElement.innerHTML), vditor);
             } else {
                 renderers.Md2VditorSVDOM = {renderLinkDest};
                 vditor.lute.SetJSRenderers({renderers});
-                processPaste(vditor, vditor.lute.HTML2Md(tempElement.innerHTML).trimRight());
+                processPaste(vditor, vditor.luteProxy.HTML2Md(tempElement.innerHTML).trimRight());
             }
             vditor.outline.render(vditor);
         } else if (files.length > 0) {
@@ -1454,11 +1454,11 @@ export const paste = async (vditor: IVditor, event: (ClipboardEvent | DragEvent)
             if (vditor.currentMode === "ir") {
                 renderers.Md2VditorIRDOM = {renderLinkDest};
                 vditor.lute.SetJSRenderers({renderers});
-                insertHTML(vditor.lute.Md2VditorIRDOM(textPlain), vditor);
+                insertHTML(vditor.luteProxy.Md2VditorIRDOM(textPlain), vditor);
             } else if (vditor.currentMode === "wysiwyg") {
                 renderers.Md2VditorDOM = {renderLinkDest};
                 vditor.lute.SetJSRenderers({renderers});
-                insertHTML(vditor.lute.Md2VditorDOM(textPlain), vditor);
+                insertHTML(vditor.luteProxy.Md2VditorDOM(textPlain), vditor);
             } else {
                 renderers.Md2VditorSVDOM = {renderLinkDest};
                 vditor.lute.SetJSRenderers({renderers});
@@ -1477,9 +1477,9 @@ export const paste = async (vditor: IVditor, event: (ClipboardEvent | DragEvent)
             });
             range.insertNode(document.createElement("wbr"));
             if (vditor.currentMode === "wysiwyg") {
-                blockElement.outerHTML = vditor.lute.SpinVditorDOM(blockElement.outerHTML);
+                blockElement.outerHTML = vditor.luteProxy.SpinVditorDOM(blockElement.outerHTML);
             } else {
-                blockElement.outerHTML = vditor.lute.SpinVditorIRDOM(blockElement.outerHTML);
+                blockElement.outerHTML = vditor.luteProxy.SpinVditorIRDOM(blockElement.outerHTML);
             }
             setRangeByWbr(vditor[vditor.currentMode].element, range);
         }

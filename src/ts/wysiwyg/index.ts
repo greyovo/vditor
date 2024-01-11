@@ -239,7 +239,7 @@ class WYSIWYG {
         const tempElement = document.createElement("div");
         tempElement.appendChild(range.cloneContents());
 
-        event.clipboardData.setData("text/plain", vditor.lute.VditorDOM2Md(tempElement.innerHTML).trim());
+        event.clipboardData.setData("text/plain", vditor.luteProxy.VditorDOM2Md(tempElement.innerHTML).trim());
         event.clipboardData.setData("text/html", "");
     }
 
@@ -302,9 +302,9 @@ class WYSIWYG {
                     range.insertNode(node.content.cloneNode(true));
                     const blockElement = hasClosestByAttribute(range.startContainer, "data-block", "0");
                     if (blockElement) {
-                        blockElement.outerHTML = vditor.lute.SpinVditorDOM(blockElement.outerHTML);
+                        blockElement.outerHTML = vditor.luteProxy.SpinVditorDOM(blockElement.outerHTML);
                     } else {
-                        vditor.wysiwyg.element.innerHTML = vditor.lute.SpinVditorDOM(vditor.wysiwyg.element.innerHTML);
+                        vditor.wysiwyg.element.innerHTML = vditor.luteProxy.SpinVditorDOM(vditor.wysiwyg.element.innerHTML);
                     }
                     setRangeByWbr(vditor.wysiwyg.element, range);
                 },

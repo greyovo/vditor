@@ -177,7 +177,7 @@ const afterRender = (vditor: IVditor) => {
     if (vditor.options.value) {
       initValue = vditor.options.value;
     } else if (vditor.originalInnerHTML) {
-      initValue = vditor.lute.HTML2Md(vditor.originalInnerHTML);
+      initValue = vditor.luteProxy.HTML2Md(vditor.originalInnerHTML);
     } else if (!vditor.options.cache.enable) {
       initValue = "";
     }

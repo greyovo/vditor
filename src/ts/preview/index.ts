@@ -181,7 +181,7 @@ export class Preview {
                             this.previewElement.innerHTML = responseJSON.data;
                             this.afterRender(vditor, renderStartTime);
                         } else {
-                            let html = vditor.lute.Md2HTML(markdownText);
+                            let html = vditor.luteProxy.Md2HTML(markdownText);
                             if (vditor.options.preview.transform) {
                                 html = vditor.options.preview.transform(html);
                             }
@@ -193,7 +193,7 @@ export class Preview {
 
                 xhr.send(JSON.stringify({markdownText}));
             } else {
-                let html = vditor.lute.Md2HTML(markdownText);
+                let html = vditor.luteProxy.Md2HTML(markdownText);
                 if (vditor.options.preview.transform) {
                     html = vditor.options.preview.transform(html);
                 }

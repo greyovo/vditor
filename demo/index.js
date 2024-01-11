@@ -57,17 +57,17 @@ const initVditor = (language) => {
         lang: language,
         mode: 'ir',
         height: window.innerHeight + 100,
-        customRender: {
-            render: (md) => {
-                const div = document.createElement("div")
-                div.innerText = "render it!"
-                return div
-            },
+        hooks: {
+            // render: (md) => {
+            //     const div = document.createElement("div")
+            //     div.innerText = "render it!"
+            //     return div
+            // },
             before: (md) => {
                 console.log("customRender:", "before!");
                 return md + "\nadded before render!"
             },
-            after: (s) => new HTMLElement(),
+            after: (s) => "",
         },
         outline: {
             enable: true,

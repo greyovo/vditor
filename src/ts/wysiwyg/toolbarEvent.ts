@@ -201,7 +201,7 @@ export const toolbarEvent = (vditor: IVditor, actionBtn: Element, event: Event) 
             }
             range.insertNode(node);
             if (blockElement) {
-                blockElement.outerHTML = vditor.lute.SpinVditorDOM(blockElement.outerHTML);
+                blockElement.outerHTML = vditor.luteProxy.SpinVditorDOM(blockElement.outerHTML);
             }
             setRangeByWbr(vditor.wysiwyg.element, range);
             vditor.wysiwyg.element.querySelectorAll(".vditor-wysiwyg__preview[data-render='2']").forEach(
