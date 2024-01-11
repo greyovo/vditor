@@ -64,6 +64,7 @@ const initVditor = (language) => {
                 return div
             },
             before: (md) => {
+                console.log("customRender:", "before!");
                 return md + "\nadded before render!"
             },
             after: (s) => new HTMLElement(),

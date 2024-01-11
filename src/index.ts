@@ -28,8 +28,10 @@ import { Undo } from "./ts/undo/index";
 import { Upload } from "./ts/upload/index";
 import { addScript, addScriptSync } from "./ts/util/addScript";
 import { getSelectText } from "./ts/util/getSelectText";
+import { LuteProxy } from "./ts/util/luteProxy";
 import { Options } from "./ts/util/Options";
 import { processCodeRender } from "./ts/util/processCode";
+import { renderMd2Html } from "./ts/util/renderMd2Html";
 import { getCursorPosition, getEditorRange } from "./ts/util/selection";
 import { afterRenderEvent } from "./ts/wysiwyg/afterRenderEvent";
 import { WYSIWYG } from "./ts/wysiwyg/index";
@@ -294,17 +296,8 @@ class Vditor extends VditorMethod {
                 enableInput: false,
             });
         } else {
-            this.vditor.ir.element.innerHTML = this.vditor.lute.Md2VditorIRDOM(markdown);
-            this.vditor.ir.element
-                .querySelectorAll(".vditor-ir__preview[data-render='2']")
-                .forEach((item: HTMLElement) => {
-                    processCodeRender(item, this.vditor);
-                });
-            processAfterRender(this.vditor, {
-                enableAddUndoStack: true,
-                enableHint: false,
-                enableInput: false,
-            });
+            renderMd2Html(this.vditor, markdown)
+
         }
 
         this.vditor.outline.render(this.vditor);
@@ -475,6 +468,10 @@ class Vditor extends VditorMethod {
             this.vditor.upload = new Upload();
         }
 
+        if (mergedOptions.customRender !== undefined) {
+            this.vditor.customRender = mergedOptions.customRender;
+        }
+
         addScript(
             mergedOptions._lutePath ||
             `${mergedOptions.cdn}/dist/js/lute/lute.min.js`,
@@ -502,6 +499,8 @@ class Vditor extends VditorMethod {
                 sanitize: this.vditor.options.preview.markdown.sanitize,
                 toc: this.vditor.options.preview.markdown.toc,
             });
+
+            this.vditor.luteProxy = new LuteProxy(this.vditor.lute)
 
             this.vditor.preview = new Preview(this.vditor);
 

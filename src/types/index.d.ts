@@ -105,6 +105,50 @@ interface ILuteOptions extends IMarkdownConfig {
     lazyLoadImage?: string;
 }
 
+interface ILuteProxy {
+    // md 转换为 html
+    Md2HTML(markdown: string): string;
+
+    // 粘贴时将 html 转换为 md
+    HTML2Md(html: string): string;
+
+    // wysiwyg 转换为 html
+    VditorDOM2HTML(vhtml: string): string;
+
+    // wysiwyg 输入渲染
+    SpinVditorDOM(html: string): string;
+
+    // 粘贴时将 html 转换为 wysiwyg
+    HTML2VditorDOM(html: string): string;
+
+    // 将 wysiwyg 转换为 md
+    VditorDOM2Md(html: string): string;
+
+    // 将 md 转换为 wysiwyg
+    Md2VditorDOM(markdown: string): string;
+
+    // ir 输入渲染
+    SpinVditorIRDOM(markdown: string): string;
+
+    // ir 获取 md
+    VditorIRDOM2Md(html: string): string;
+
+    // md 转换为 ir
+    Md2VditorIRDOM(text: string): string;
+
+    // 获取 HTML
+    VditorIRDOM2HTML(html: string): string;
+
+    // 粘贴时将 html 转换为 sv
+    HTML2VditorIRDOM(html: string): string;
+
+    // sv 输入渲染
+    SpinVditorSVDOM(text: string): string;
+
+    // 粘贴是 md 转换为 sv
+    Md2VditorSVDOM(text: string): string;
+}
+
 declare class Lute {
     public static WalkStop: number;
     public static WalkSkipChildren: number;
@@ -723,6 +767,13 @@ interface IOptions {
     /** @link https://ld246.com/article/1549638745630#options-outline */
     outline?: IOutline;
 
+    /** 自定义渲染钩子，支持渲染前和渲染后 */
+    customRender?: {
+        before?(md: string): string;
+        // render?(md: string): HTMLElement; # 暂未支持
+        after?(element: HTMLElement): HTMLElement;
+    };
+
     /** 编辑器异步渲染完成后的回调方法 */
     after?(): void;
 
@@ -759,6 +810,7 @@ interface IVditor {
     options: IOptions;
     originalInnerHTML: string;
     lute: Lute;
+    luteProxy?: ILuteProxy;
     currentMode: "sv" | "wysiwyg" | "ir";
     devtools?: {
         element: HTMLDivElement,
@@ -813,8 +865,8 @@ interface IVditor {
         resetIcon(vditor: IVditor): void,
     };
     customRender?: {
-        render?(md: string): HTMLElement;
         before?(md: string): string;
+        // render?(md: string): HTMLElement;
         after?(element: HTMLElement): HTMLElement;
     };
     wysiwyg?: {

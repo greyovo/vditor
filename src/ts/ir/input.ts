@@ -1,19 +1,21 @@
-import {Constants} from "../constants";
-import {isHeadingMD, isHrMD} from "../util/fixBrowserBehavior";
+import { Constants } from "../constants";
+import { isHeadingMD, isHrMD } from "../util/fixBrowserBehavior";
 import {
     getTopList,
     hasClosestBlock, hasClosestByAttribute,
     hasClosestByClassName,
 } from "../util/hasClosest";
-import {hasClosestByTag} from "../util/hasClosestByHeadings";
-import {log} from "../util/log";
-import {processCodeRender} from "../util/processCode";
-import {getSelectPosition, setRangeByWbr} from "../util/selection";
-import {renderToc} from "../util/toc";
-import {processAfterRender} from "./process";
-import {getMarkdown} from "../markdown/getMarkdown";
+import { hasClosestByTag } from "../util/hasClosestByHeadings";
+import { log } from "../util/log";
+import { processCodeRender } from "../util/processCode";
+import { getSelectPosition, setRangeByWbr } from "../util/selection";
+import { renderToc } from "../util/toc";
+import { processAfterRender } from "./process";
+import { getMarkdown } from "../markdown/getMarkdown";
 
 export const input = (vditor: IVditor, range: Range, ignoreSpace = false, event?: InputEvent) => {
+    vditor.customRender?.before(getMarkdown(vditor))
+
     let blockElement = hasClosestBlock(range.startContainer);
     // 前后可以输入空格
     if (blockElement && !ignoreSpace && blockElement.getAttribute("data-type") !== "code-block") {
@@ -29,8 +31,8 @@ export const input = (vditor: IVditor, range: Range, ignoreSpace = false, event?
         let startSpace = true;
         for (let i = startOffset - 1;
             // 软换行后有空格
-             i > blockElement.textContent.substr(0, startOffset).lastIndexOf("\n");
-             i--) {
+            i > blockElement.textContent.substr(0, startOffset).lastIndexOf("\n");
+            i--) {
             if (blockElement.textContent.charAt(i) !== " " &&
                 // 多个 tab 前删除不形成代码块 https://github.com/Vanessa219/vditor/issues/162 1
                 blockElement.textContent.charAt(i) !== "\t") {
