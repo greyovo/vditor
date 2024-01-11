@@ -812,6 +812,11 @@ interface IVditor {
         recordFirstPosition(vditor: IVditor, event: KeyboardEvent): void,
         resetIcon(vditor: IVditor): void,
     };
+    customRender?: {
+        render?(md: string): HTMLElement;
+        before?(md: string): string;
+        after?(element: HTMLElement): HTMLElement;
+    };
     wysiwyg?: {
         range: Range,
         element: HTMLPreElement,

@@ -31,6 +31,7 @@ class IR {
     public hlToolbarTimeoutId: number;
     public composingLock: boolean = false;
     public preventInput: boolean;
+    private scrollListener: () => void;
 
     constructor(vditor: IVditor) {
         const divElement = document.createElement("div");
@@ -79,12 +80,61 @@ contenteditable="true" spellcheck="false"></pre>
     }
 
     private bindEvent(vditor: IVditor) {
+        this.unbindListener();
         this.element.addEventListener("paste", (event: ClipboardEvent & { target: HTMLElement }) => {
             paste(vditor, event, {
                 pasteCode: (code: string) => {
                     document.execCommand("insertHTML", false, code);
                 },
             });
+        });
+
+        window.addEventListener("scroll", this.scrollListener = () => {
+            // hidePanel(vditor, ["hint"]);
+            if (this.popover.style.display !== "block" || this.selectPopover.style.display !== "block") {
+                return;
+            }
+            const top = parseInt(this.popover.getAttribute("data-top"), 10);
+            if (vditor.options.height !== "auto") {
+                if (vditor.options.toolbarConfig.pin && vditor.toolbar.element.getBoundingClientRect().top === 0) {
+                    const popoverTop = Math.max(window.scrollY - vditor.element.offsetTop - 8,
+                        Math.min(top - vditor.ir.element.scrollTop, this.element.clientHeight - 21)) + "px";
+                    if (this.popover.style.display === "block") {
+                        this.popover.style.top = popoverTop;
+                    }
+                    if (this.selectPopover.style.display === "block") {
+                        this.selectPopover.style.top = popoverTop;
+                    }
+                }
+                return;
+            } else if (!vditor.options.toolbarConfig.pin) {
+                return;
+            }
+            const popoverTop1 = Math.max(top, (window.scrollY - vditor.element.offsetTop - 8)) + "px";
+            if (this.popover.style.display === "block") {
+                this.popover.style.top = popoverTop1;
+            }
+            if (this.selectPopover.style.display === "block") {
+                this.selectPopover.style.top = popoverTop1;
+            }
+        });
+
+        this.element.addEventListener("scroll", () => {
+            // hidePanel(vditor, ["hint"]);
+            if (vditor.options.comment && vditor.options.comment.enable && vditor.options.comment.scroll) {
+                vditor.options.comment.scroll(vditor.ir.element.scrollTop);
+            }
+            if (this.popover.style.display !== "block") {
+                return;
+            }
+            const top = parseInt(this.popover.getAttribute("data-top"), 10) - vditor.ir.element.scrollTop;
+            let max = -8;
+            if (vditor.options.toolbarConfig.pin && vditor.toolbar.element.getBoundingClientRect().top === 0) {
+                max = window.scrollY - vditor.element.offsetTop + max;
+            }
+            const topPx = Math.max(max, Math.min(top, this.element.clientHeight - 21)) + "px";
+            this.popover.style.top = topPx;
+            this.selectPopover.style.top = topPx;
         });
 
         this.element.addEventListener("compositionstart", (event: InputEvent) => {
@@ -268,6 +318,10 @@ contenteditable="true" spellcheck="false"></pre>
                 }
             }
         });
+    }
+
+    private unbindListener() {
+        window.removeEventListener("scroll", this.scrollListener);
     }
 }
 

@@ -1,40 +1,40 @@
 import "./assets/less/index.less";
 import VditorMethod from "./method";
-import {Constants, VDITOR_VERSION} from "./ts/constants";
-import {DevTools} from "./ts/devtools/index";
-import {Hint} from "./ts/hint/index";
-import {IR} from "./ts/ir/index";
-import {input as irInput} from "./ts/ir/input";
-import {processAfterRender} from "./ts/ir/process";
-import {getHTML} from "./ts/markdown/getHTML";
-import {getMarkdown} from "./ts/markdown/getMarkdown";
-import {setLute} from "./ts/markdown/setLute";
-import {Outline} from "./ts/outline/index";
-import {Preview} from "./ts/preview/index";
-import {Resize} from "./ts/resize/index";
-import {Editor} from "./ts/sv/index";
-import {inputEvent} from "./ts/sv/inputEvent";
-import {processAfterRender as processSVAfterRender} from "./ts/sv/process";
-import {Tip} from "./ts/tip/index";
-import {Toolbar} from "./ts/toolbar/index";
-import {disableToolbar, hidePanel} from "./ts/toolbar/setToolbar";
-import {enableToolbar} from "./ts/toolbar/setToolbar";
-import {initUI, UIUnbindListener} from "./ts/ui/initUI";
-import {setCodeTheme} from "./ts/ui/setCodeTheme";
-import {setContentTheme} from "./ts/ui/setContentTheme";
-import {setPreviewMode} from "./ts/ui/setPreviewMode";
-import {setTheme} from "./ts/ui/setTheme";
-import {Undo} from "./ts/undo/index";
-import {Upload} from "./ts/upload/index";
-import {addScript, addScriptSync} from "./ts/util/addScript";
-import {getSelectText} from "./ts/util/getSelectText";
-import {Options} from "./ts/util/Options";
-import {processCodeRender} from "./ts/util/processCode";
-import {getCursorPosition, getEditorRange} from "./ts/util/selection";
-import {afterRenderEvent} from "./ts/wysiwyg/afterRenderEvent";
-import {WYSIWYG} from "./ts/wysiwyg/index";
-import {input} from "./ts/wysiwyg/input";
-import {renderDomByMd} from "./ts/wysiwyg/renderDomByMd";
+import { Constants, VDITOR_VERSION } from "./ts/constants";
+import { DevTools } from "./ts/devtools/index";
+import { Hint } from "./ts/hint/index";
+import { IR } from "./ts/ir/index";
+import { input as irInput } from "./ts/ir/input";
+import { processAfterRender } from "./ts/ir/process";
+import { getHTML } from "./ts/markdown/getHTML";
+import { getMarkdown } from "./ts/markdown/getMarkdown";
+import { setLute } from "./ts/markdown/setLute";
+import { Outline } from "./ts/outline/index";
+import { Preview } from "./ts/preview/index";
+import { Resize } from "./ts/resize/index";
+import { Editor } from "./ts/sv/index";
+import { inputEvent } from "./ts/sv/inputEvent";
+import { processAfterRender as processSVAfterRender } from "./ts/sv/process";
+import { Tip } from "./ts/tip/index";
+import { Toolbar } from "./ts/toolbar/index";
+import { disableToolbar, hidePanel } from "./ts/toolbar/setToolbar";
+import { enableToolbar } from "./ts/toolbar/setToolbar";
+import { initUI, UIUnbindListener } from "./ts/ui/initUI";
+import { setCodeTheme } from "./ts/ui/setCodeTheme";
+import { setContentTheme } from "./ts/ui/setContentTheme";
+import { setPreviewMode } from "./ts/ui/setPreviewMode";
+import { setTheme } from "./ts/ui/setTheme";
+import { Undo } from "./ts/undo/index";
+import { Upload } from "./ts/upload/index";
+import { addScript, addScriptSync } from "./ts/util/addScript";
+import { getSelectText } from "./ts/util/getSelectText";
+import { Options } from "./ts/util/Options";
+import { processCodeRender } from "./ts/util/processCode";
+import { getCursorPosition, getEditorRange } from "./ts/util/selection";
+import { afterRenderEvent } from "./ts/wysiwyg/afterRenderEvent";
+import { WYSIWYG } from "./ts/wysiwyg/index";
+import { input } from "./ts/wysiwyg/input";
+import { renderDomByMd } from "./ts/wysiwyg/renderDomByMd";
 
 class Vditor extends VditorMethod {
     public readonly version: string;
@@ -56,7 +56,7 @@ class Vditor extends VditorMethod {
                     },
                 };
             } else if (!options.cache) {
-                options.cache = {id: `vditor${id}`};
+                options.cache = { id: `vditor${id}` };
             } else if (!options.cache.id) {
                 options.cache.id = `vditor${id}`;
             }
