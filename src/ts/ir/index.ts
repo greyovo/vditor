@@ -1,5 +1,5 @@
-import {Constants} from "../constants";
-import {isCtrl, isFirefox} from "../util/compatibility";
+import { Constants } from "../constants";
+import { isCtrl, isFirefox } from "../util/compatibility";
 import {
     blurEvent,
     copyEvent, cutEvent, dblclickEvent,
@@ -9,21 +9,24 @@ import {
     scrollCenter,
     selectEvent,
 } from "../util/editorCommonEvent";
-import {paste} from "../util/fixBrowserBehavior";
-import {hasClosestByAttribute, hasClosestByClassName} from "../util/hasClosest";
+import { paste } from "../util/fixBrowserBehavior";
+import { hasClosestByAttribute, hasClosestByClassName } from "../util/hasClosest";
 import {
     getEditorRange, setRangeByWbr,
     setSelectionFocus,
 } from "../util/selection";
-import {clickToc} from "../util/toc";
-import {expandMarker} from "./expandMarker";
-import {highlightToolbarIR} from "./highlightToolbarIR";
-import {input} from "./input";
-import {processAfterRender, processHint} from "./process";
+import { clickToc } from "../util/toc";
+import { expandMarker } from "./expandMarker";
+import { highlightToolbarIR } from "./highlightToolbarIR";
+import { input } from "./input";
+import { popoverToolbar } from "./popoverToolbar";
+import { processAfterRender, processHint } from "./process";
 
 class IR {
     public range: Range;
     public element: HTMLPreElement;
+    public selectPopover: HTMLDivElement;
+    public popover: HTMLDivElement;
     public processTimeoutId: number;
     public hlToolbarTimeoutId: number;
     public composingLock: boolean = false;
@@ -33,10 +36,20 @@ class IR {
         const divElement = document.createElement("div");
         divElement.className = "vditor-ir";
 
+        //         divElement.innerHTML = `<pre class="vditor-reset" placeholder="${vditor.options.placeholder}"
+        //  contenteditable="true" spellcheck="false"></pre>`;
         divElement.innerHTML = `<pre class="vditor-reset" placeholder="${vditor.options.placeholder}"
- contenteditable="true" spellcheck="false"></pre>`;
+contenteditable="true" spellcheck="false"></pre>
+<div class="vditor-panel vditor-panel--none"></div>
+<div class="vditor-panel vditor-panel--none">
+   <button type="button" aria-label="${window.VditorI18n.comment}" class="vditor-icon vditor-tooltipped vditor-tooltipped__n">
+       <svg><use xlink:href="#vditor-icon-comment"></use></svg>
+   </button>
+</div>`;
 
         this.element = divElement.firstElementChild as HTMLPreElement;
+        this.popover = divElement.firstElementChild.nextElementSibling as HTMLDivElement;
+        this.selectPopover = divElement.lastElementChild as HTMLDivElement;
 
         this.bindEvent(vditor);
 
@@ -182,6 +195,7 @@ class IR {
             }
             clickToc(event, vditor);
             highlightToolbarIR(vditor);
+            popoverToolbar(vditor)
         });
 
         this.element.addEventListener("keyup", (event) => {
@@ -257,4 +271,4 @@ class IR {
     }
 }
 
-export {IR};
+export { IR };

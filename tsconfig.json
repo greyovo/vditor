@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./dist/",
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "module": "esnext",
     "target": "es5",
     "lib": [
@@ -11,9 +11,7 @@
     "typeRoots": [
       "./node_modules/@types"
     ],
-    "types": [
-      "./types"
-    ],
+    "types": [],
     "declaration": true,
   },
   "include": [

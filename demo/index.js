@@ -55,7 +55,7 @@ const initVditor = (language) => {
         cdn: 'https://cdn.jsdelivr.net/npm/vditor',
         toolbar,
         lang: language,
-        mode: 'wysiwyg',
+        mode: 'ir',
         height: window.innerHeight + 100,
         outline: {
             enable: true,
