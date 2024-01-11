@@ -6,14 +6,21 @@
   width: 100%;
 
   &__node {
-    &[data-type="code-block"]:before,
-    &[data-type="code-block"]:after,
+    // &[data-type="code-block"]:before,
+    // &[data-type="code-block"]:after,
     &[data-type="yaml-front-matter"]:before,
     &[data-type="yaml-front-matter"]:after,
     &[data-type="math-block"]:before,
     &[data-type="math-block"]:after {
       content: ' ';
       color: var(--second-color);
+    }
+
+    &:not(.vditor-ir__node--expand) {
+      .vditor-ir__marker.vditor-ir__marker--info,
+      .vditor-ir__marker--pre.vditor-ir__marker {
+        display: none;
+      }
     }
 
     &:not(.vditor-ir__node--expand) .vditor-ir__marker {
@@ -30,7 +37,7 @@
     }
 
     &[data-type="html-block"] {
-      margin-bottom: 1em;
+      margin-bottom: 0em;
     }
 
     .vditor-ir__marker {
@@ -160,7 +167,7 @@
     }
 
     pre {
-      margin: 0;
+      margin-top: 0;
     }
   }
 
