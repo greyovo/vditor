@@ -125,7 +125,7 @@ module.exports = {
         {from: 'src/css', to: 'css'},
         {from: 'src/images', to: 'images'},
         {from: 'src/js', to: 'js'},
-        {from: 'src/types', to: 'types'},
+        {from: 'types', to: 'types'},
       ],
     }),
   ],
