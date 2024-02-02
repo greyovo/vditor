@@ -86,11 +86,13 @@ const initVditor = (language) => {
         },
         toolbarConfig: {
             pin: true,
+            enable: false,
         },
         counter: {
             enable: true,
             type: 'text',
         },
+        borderless: true,
         // hint: {
         //     emojiPath: 'https://cdn.jsdelivr.net/npm/vditor@1.8.3/dist/images/emoji',
         //     emojiTail: '<a href="https://ld246.com/settings/function" target="_blank">设置常用表情</a>',

@@ -1,5 +1,7 @@
 import { log } from "./log"
 
+// by @greyovo
+// 在实际调用 Lute 渲染前进行拦截，方便对外提供更多事件钩子
 export class LuteProxy implements ILuteProxy {
 
   private instance: Lute

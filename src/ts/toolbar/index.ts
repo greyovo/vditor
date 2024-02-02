@@ -67,6 +67,10 @@ export class Toolbar {
             vditor.counter = new Counter(vditor);
             this.element.appendChild(vditor.counter.element);
         }
+
+        if (!vditor.options.toolbarConfig.enable) {
+            this.toggle(false)
+        }
     }
 
     private genItem(vditor: IVditor, menuItem: IMenuItem, index: number) {
@@ -173,6 +177,7 @@ export class Toolbar {
         return menuItemObj.element;
     }
 
+    // by @greyovo
     public toggle(show = true) {
         if (show) {
             this.element.style.display = "block";

@@ -1,5 +1,5 @@
-import {Constants} from "../constants";
-import {merge} from "./merge";
+import { Constants } from "../constants";
+import { merge } from "./merge";
 
 export class Options {
     public options: IOptions;
@@ -118,6 +118,7 @@ export class Options {
         toolbarConfig: {
             hide: false,
             pin: false,
+            enable: true,
         },
         typewriterMode: false,
         undoDelay: 800,
@@ -133,6 +134,7 @@ export class Options {
         },
         value: "",
         width: "auto",
+        borderless: false,
     };
 
     constructor(options: IOptions) {

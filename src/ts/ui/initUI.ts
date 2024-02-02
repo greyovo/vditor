@@ -1,9 +1,9 @@
-import {Constants} from "../constants";
-import {setEditMode} from "../toolbar/EditMode";
-import {hidePanel} from "../toolbar/setToolbar";
-import {accessLocalStorage} from "../util/compatibility";
-import {setContentTheme} from "./setContentTheme";
-import {setTheme} from "./setTheme";
+import { Constants } from "../constants";
+import { setEditMode } from "../toolbar/EditMode";
+import { hidePanel } from "../toolbar/setToolbar";
+import { accessLocalStorage } from "../util/compatibility";
+import { setContentTheme } from "./setContentTheme";
+import { setTheme } from "./setTheme";
 
 declare global {
   interface Window {
@@ -14,6 +14,10 @@ declare global {
 export const initUI = (vditor: IVditor) => {
   vditor.element.innerHTML = "";
   vditor.element.classList.add("vditor");
+  if (vditor.options.borderless) {
+    vditor.element.style.border = "none"
+    vditor.element.style.borderRadius = "0"
+  }
   // 支持 RTL
   if (vditor.options.rtl) {
     vditor.element.setAttribute("dir", "rtl")
