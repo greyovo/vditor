@@ -9,6 +9,7 @@
   "funding": "https://ld246.com/sponsor",
   "files": [
     "dist/*",
+    "src/js/*",
     "src/index.ts",
     "src/method.ts",
     "src/ts/*",
