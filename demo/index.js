@@ -52,22 +52,19 @@ const initVditor = (language) => {
     window.vditor = new Vditor('vditor', {
         // _lutePath: `http://192.168.31.194:9090/lute.min.js?${new Date().getTime()}`,
         _lutePath: 'src/js/lute/lute.min.js',
-        cdn: 'https://cdn.jsdelivr.net/npm/vditor',
+        cdn: './',
         toolbar,
         lang: language,
         mode: 'ir',
         height: window.innerHeight + 100,
         hooks: {
-            // render: (md) => {
-            //     const div = document.createElement("div")
-            //     div.innerText = "render it!"
-            //     return div
-            // },
-            before: (md) => {
-                console.log("customRender:", "before!");
-                return md + "\nadded before render!"
-            },
-            after: (s) => "",
+            ir: {
+                before: (md) => {
+                    console.log("ir customRender:", md);
+                    return md
+                },
+                after: (s) => "",
+            }
         },
         outline: {
             enable: true,

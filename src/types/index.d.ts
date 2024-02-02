@@ -10,6 +10,29 @@ interface IObject {
     [key: string]: string;
 }
 
+interface IHooks {
+    md2html?: {
+        before?(md: string): string;
+        after?(md: string): string;
+    };
+    html2md?: {
+        before?(md: string): string;
+        after?(md: string): string;
+    };
+    wysiwyg?: {
+        before?(md: string): string;
+        after?(md: string): string;
+    };
+    ir?: {
+        before?(md: string): string;
+        after?(md: string): string;
+    };
+    sv?: {
+        before?(md: string): string;
+        after?(md: string): string;
+    };
+}
+
 interface ILuteNode {
     TokensStr: () => string;
     __internal_object__: {
@@ -768,11 +791,7 @@ interface IOptions {
     outline?: IOutline;
 
     /** 自定义渲染钩子，支持渲染前和渲染后 */
-    hooks?: {
-        before?(md: string): string;
-        // render?(md: string): HTMLElement; # 暂未支持
-        after?(html: string): string;
-    };
+    hooks?: IHooks;
 
     /** 编辑器异步渲染完成后的回调方法 */
     after?(): void;
@@ -824,6 +843,7 @@ interface IVditor {
     toolbar?: {
         elements?: { [key: string]: HTMLElement },
         element?: HTMLElement,
+        toggle(show?: boolean): void,
     };
     preview?: {
         element: HTMLElement,
@@ -864,11 +884,7 @@ interface IVditor {
         recordFirstPosition(vditor: IVditor, event: KeyboardEvent): void,
         resetIcon(vditor: IVditor): void,
     };
-    hooks?: {
-        before?(md: string): string;
-        // render?(md: string): HTMLElement;
-        after?(html: string): string;
-    };
+    hooks?: IHooks;
     wysiwyg?: {
         range: Range,
         element: HTMLPreElement,

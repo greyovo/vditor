@@ -215,6 +215,45 @@ class Vditor extends VditorMethod {
         this.vditor.options.cache.enable = true;
     }
 
+    //////////////// @greyovo 自定义增加的方法 start ///////////////////////
+
+    public redo() {
+        this.vditor.undo.redo(this.vditor);
+    }
+
+    public undo() {
+        this.vditor.undo.undo(this.vditor);
+    }
+
+    public toggleOutline(show?: boolean) {
+        if (show === undefined) {
+            const shouldShow = !this.getOutlineVisible();
+            this.vditor.outline.toggle(this.vditor, shouldShow, false)
+        } else {
+            this.vditor.outline.toggle(this.vditor, show, false)
+        }
+    }
+
+    public getOutlineVisible(): boolean {
+        return this.vditor.outline.element.style.display !== 'none';
+    }
+
+    public toggleToolbar(show?: boolean) {
+        if (show === undefined) {
+            const shouldShow = !this.getToolbarVisible();
+            this.vditor.toolbar?.toggle(shouldShow)
+        } else {
+            this.vditor.toolbar?.toggle(show)
+        }
+    }
+
+    public getToolbarVisible(): boolean {
+        return this.vditor.toolbar?.element.style.display !== 'none';
+    }
+
+    //////////////// @greyovo 自定义增加的方法 end ///////////////////////
+
+
     /** HTML 转 md */
     public html2md(value: string) {
         return this.vditor.luteProxy.HTML2Md(value);
@@ -464,6 +503,7 @@ class Vditor extends VditorMethod {
         this.vditor.wysiwyg = new WYSIWYG(this.vditor);
         this.vditor.ir = new IR(this.vditor);
         this.vditor.toolbar = new Toolbar(this.vditor);
+        this.vditor.hooks = mergedOptions.hooks;
 
         if (mergedOptions.resize.enable) {
             this.vditor.resize = new Resize(this.vditor);
@@ -477,9 +517,7 @@ class Vditor extends VditorMethod {
             this.vditor.upload = new Upload();
         }
 
-        if (mergedOptions.hooks !== undefined) {
-            this.vditor.hooks = mergedOptions.hooks;
-        }
+
 
         addScript(
             mergedOptions._lutePath ||
