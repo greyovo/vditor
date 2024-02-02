@@ -653,7 +653,6 @@ Vditor 使用 [MIT](https://opensource.org/licenses/MIT) 开源协议。
 * [Lute](https://github.com/88250/lute)：🎼 一款结构化的 Markdown 引擎，支持 Go 和 JavaScript
 * [highlight.js](https://github.com/highlightjs/highlight.js)：JavaScript syntax highlighter
 * [mermaid](https://github.com/knsv/mermaid)：Generation of diagram and flowchart from text in a similar manner as Markdown
-* [incubator-echarts](https://github.com/apache/incubator-echarts)：A powerful, interactive charting and visualization library for browser
 * [abcjs](https://github.com/paulrosen/abcjs)：JavaScript library for rendering standard music notation in a browser
 
 ## 📽️ 历史

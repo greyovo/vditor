@@ -604,7 +604,6 @@ Vditor uses the [MIT](https://opensource.org/licenses/MIT) open source license.
 * [Lute](https://github.com/88250/lute): A structured Markdown engine that supports Go and JavaScript
 * [highlight.js](https://github.com/highlightjs/highlight.js): JavaScript syntax highlighter
 * [mermaid](https://github.com/knsv/mermaid): Generation of diagram and flowchart from text in a similar manner as Markdown
-* [incubator-echarts](https://github.com/apache/incubator-echarts): A powerful, interactive charting and visualization library for browser
 * [abcjs](https://github.com/paulrosen/abcjs): JavaScript library for rendering standard music notation in a browser
 * [IntelliJ IDEA](https://www.jetbrains.com/?from=Vditor): Family of capable and ergonomic development environments
 
