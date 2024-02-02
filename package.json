@@ -1,19 +1,14 @@
 {
-  "name": "vditor",
-  "version": "3.9.8",
-  "description": "♏ 易于使用的 Markdown 编辑器，为适配不同的应用场景而生",
-  "author": "Vanessa <v@b3log.org> (http://vanessa.b3log.org)",
+  "name": "vditor-x",
+  "version": "4.0.0",
+  "description": "♏ 易于使用的 Markdown 编辑器，为适配不同的应用场景而生。本版本由 @greyovo 修改。",
+  "author": "Vanessa <v@b3log.org> (http://vanessa.b3log.org), greyovo<grey030@foxmail.com>",
   "homepage": "https://b3log.org/vditor",
   "jsdelivr": "dist/index.min.js",
   "main": "dist/index.min.js",
   "funding": "https://ld246.com/sponsor",
   "files": [
-    "dist/*",
-    "src/js/*",
-    "src/index.ts",
-    "src/method.ts",
-    "src/ts/*",
-    "src/assets/*"
+    "dist/*"
   ],
   "dependencies": {
     "diff-match-patch": "^1.0.5"
