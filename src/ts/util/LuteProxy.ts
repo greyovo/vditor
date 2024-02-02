@@ -42,8 +42,8 @@ export class LuteProxy implements ILuteProxy {
   public Md2HTML(markdown: string): string {
     return this.renderWrapper(
       "Md2HTML", this.instance.Md2HTML, markdown,
-      this.hooks?.md2html.before,
-      this.hooks?.md2html.after,
+      this.hooks?.md2html?.before,
+      this.hooks?.md2html?.after,
     )
   }
 
