@@ -54,6 +54,11 @@ const initVditor = (language) => {
         _lutePath: 'src/js/lute/lute.min.js',
         cdn: '../',
         toolbar,
+        after: () => {
+            // auto set dark mode
+            window.vditor.setTheme('dark', 'dark', 'native');
+            document.querySelector('body').style.backgroundColor='#222222'
+        },
         lang: language,
         mode: 'ir',
         height: window.innerHeight + 100,
@@ -132,6 +137,7 @@ const initVditor = (language) => {
         //         }],
         // },
         tab: '\t',
+        theme: "dark",
         upload: {
             accept: 'image/*,.mp3, .wav, .rar',
             token: 'test',

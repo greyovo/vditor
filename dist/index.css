@@ -1,5 +1,5 @@
 /*!
- * Vditor v3.9.8 - A markdown editor written in TypeScript.
+ * Vditor v4.1.0 - A markdown editor written in TypeScript.
  *
  * MIT License
  *
@@ -51,11 +51,11 @@
   --ir-paren-color: #008000;
 }
 .vditor--dark {
-  --border-color: #141414;
+  --border-color: rgba(255, 255, 255, 0.1);
   --second-color: rgba(185, 185, 185, 0.36);
-  --panel-background-color: #24292e;
+  --panel-background-color: #2A2A2A;
   --panel-shadow: 0 1px 2px rgba(255, 255, 255, 0.2);
-  --toolbar-background-color: #1d2125;
+  --toolbar-background-color: #222222;
   --toolbar-icon-color: #b9b9b9;
   --toolbar-icon-hover-color: #fff;
   --textarea-background-color: var(--panel-background-color);
